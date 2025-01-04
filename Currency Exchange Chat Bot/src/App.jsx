@@ -5,6 +5,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import ChatBot from './ChatBot';
 import Header from './Header';
+import Converter from './Converter';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
@@ -35,7 +36,8 @@ function App() {
   return (
     <>
       <Header></Header>
-      <section className="dialog mx-auto my-5 p-3" style={{ width: "50%" }}>
+      <Converter></Converter>
+      {/* <section className="dialog mx-auto my-5 p-3" style={{ width: "50%" }}>
   <div className="chat-response d-flex align-items-start justify-content-start mb-3">
     <div
       className="icon text-white rounded p-2 d-flex justify-content-center align-items-center"
@@ -113,7 +115,7 @@ function App() {
       Send <i className="fa-regular fa-paper-plane ms-2"></i>
     </button>
   </div>
-</section>
+</section> */}
 
 
 
