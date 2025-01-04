@@ -140,6 +140,11 @@ const CurrencyConverterBot = () => {
           className="form-control"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleUserMessage();
+            }
+          }}
           placeholder="Enter your message"
         />
         <button className="btn btn-primary" onClick={handleUserMessage}>
