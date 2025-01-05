@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Trends from './Trends';
 
-const Trends = () => {
-  return <h2>Trends Page</h2>;
-};
-
-const App = () => {
+const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +36,6 @@ const App = () => {
   };
 
   return (
-    <Router>
       <header
         className="header p-3 d-flex justify-content-between align-items-center bd-navbar sticky-top"
         style={{ background: "rgb(9, 162, 70)", color: "rgb(255, 255, 255)" }}
@@ -194,12 +190,7 @@ const App = () => {
           </div>
         )}
       </header>
-
-      <Routes>
-        <Route path="/trends" element={<Trends />} />
-      </Routes>
-    </Router>
   );
 };
 
-export default App;
+export default Header;

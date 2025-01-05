@@ -3,9 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 // import ChatBot from './ChatBot';
 import Header from './Header';
 import Converter from './Converter';
+import Trends from './Trends';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
@@ -35,96 +37,13 @@ function App() {
 
   return (
     <>
+    <Router>
       <Header></Header>
-      <Converter></Converter>
-      {/* <section className="dialog mx-auto my-5 p-3" style={{ width: "50%" }}>
-  <div className="chat-response d-flex align-items-start justify-content-start mb-3">
-    <div
-      className="icon text-white rounded p-2 d-flex justify-content-center align-items-center"
-      style={{ width: "35px", height: "35px" }}
-    >
-      <img
-        src="/imgs/icon.png"
-        alt="Bot Icon"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: "50%",
-        }}
-      />
-    </div>
-    <div className="msg-bubble bg-primary text-white rounded p-2 ms-2">
-      <p className="mb-0">Please input original currency and amount</p>
-    </div>
-  </div>
-
-  <div className="user-bubble d-flex justify-content-end mb-3">
-    <div className="msg-bubble bg-light text-dark rounded p-2">
-      <p className="mb-0">500 hryvnias</p>
-    </div>
-  </div>
-
-  <div className="chat-response d-flex align-items-start justify-content-start mb-3">
-    <div
-      className="icon text-white rounded p-2 d-flex justify-content-center align-items-center"
-      style={{ width: "35px", height: "35px" }}
-    >
-      <img
-        src="/imgs/icon.png"
-        alt="Bot Icon"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: "50%",
-        }}
-      />
-    </div>
-    <div className="msg-bubble bg-primary text-white rounded p-2 ms-2">
-      <p className="mb-0">Please input original currency and amount</p>
-    </div>
-  </div>
-
-  <div className="user-bubble d-flex justify-content-end mb-3">
-    <div className="msg-bubble bg-light text-dark rounded p-2">
-      <p className="mb-0">500 hryvnias</p>
-    </div>
-  </div>
-</section>
-
-
-
-<section 
-  className="input-field mx-auto my-5 p-3 border rounded" 
-  style={{ width: "50%" }}
->
-  <div className="input-group mb-3">
-    <input 
-      type="text" 
-      className="form-control" 
-      placeholder="Write your message to exchange currency" 
-      aria-label="Recipient's username" 
-      aria-describedby="button-addon2" 
-    />
-    <button 
-      className="btn btn-outline-secondary d-flex align-items-center" 
-      type="button" 
-      id="button-addon2"
-    >
-      Send <i className="fa-regular fa-paper-plane ms-2"></i>
-    </button>
-  </div>
-</section> */}
-
-
-
-
-
-
-
-
-
+      <Routes>
+        <Route path="/" element={<Converter />} />
+        <Route path="/trends" element={<Trends />} />
+      </Routes>
+    </Router>
       {loading ? (
         <p>Loading exchange rates...</p>
       ) : error ? (
