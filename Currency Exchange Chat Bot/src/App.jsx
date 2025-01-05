@@ -39,41 +39,13 @@ function App() {
   return (
     <>
     <Router>
-      <Header></Header>
+    <Header />
       <Routes>
         <Route path="/" element={<Converter />} />
         <Route path="/trends" element={<Trends />} />
         <Route path="/map" element={<BankMap />} />
       </Routes>
     </Router>
-      {loading ? (
-        <p>Loading exchange rates...</p>
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
-        <div>
-          {/* < ChatBot></ChatBot> */}
-          <h2>Exchange Rates</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Currency</th>
-                <th>Rate</th>
-                <th>Code</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exchangeRates.map((rate) => (
-                <tr key={rate.r030}>
-                  <td>{rate.txt}</td>
-                  <td>{rate.rate}</td>
-                  <td>{rate.cc}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
     </>
   );
 }
