@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Header from './Header';
 import Converter from './Converter';
 import Trends from './Trends';
+import BankMap from './BankMap';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Converter />} />
         <Route path="/trends" element={<Trends />} />
+        <Route path="/map" element={<BankMap />} />
       </Routes>
     </Router>
       {loading ? (
