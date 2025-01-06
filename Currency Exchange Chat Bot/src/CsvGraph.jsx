@@ -5,35 +5,41 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 const CsvGraph = () => {
   const [data, setData] = useState([]);
 
-  const parseCsvData = () => {
-    const csvData = `
-Date,Close
-2.1.23,"0,09692436104"
-03.01.2023 23:58:00,"0,09601402382"
-04.01.2023 23:58:00,"0,09768857051"
-05.01.2023 23:58:00,"0,09684074132"
-06.01.2023 23:58:00,"0,09868538628"
-08.01.2023 23:58:00,"0,0978051908"`;
+  const fetchCsvData = async () => {
+    try {
+      const response = await fetch('/exchange_history/usduah.csv'); // Path to the CSV file in the public folder
+      const csvText = await response.text();
 
-    // Parse CSV data
-    Papa.parse(csvData, {
-      header: true,
-      skipEmptyLines: true,
-      delimiter: ",",
-      transform: (value, field) =>
-        field === "Close" ? parseFloat(value.replace(",", ".")) : value,
-      complete: (result) => {
-        const formattedData = result.data.map((row) => ({
-          ...row,
-          Date: new Date(row.Date).toLocaleDateString("en-GB"), // Format the date
-        }));
-        setData(formattedData);
-      },
-    });
+      // Parse CSV data
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        delimiter: ",",
+        transform: (value, field)  => {
+            if (field === "Close") {
+              return parseFloat(value.replace(",", ".")); // Handle numeric values with commas
+            } else if (field === "Date") {
+              // Parse Date field in dd.MM.yyyy format
+              const [day, month, year] = value.split('.');
+              return new Date(`${year}-${month}-${day}`); // Convert to yyyy-mm-dd format
+            }
+            return value; // Return other values unchanged
+          },
+        complete: (result) => {
+          const formattedData = result.data.map((row) => ({
+            ...row,
+            Date: new Date(row.Date).toLocaleDateString("en-GB"), // Format the date
+          }));
+          setData(formattedData);
+        },
+      });
+    } catch (error) {
+      console.error("Error fetching or parsing CSV file:", error);
+    }
   };
 
   useEffect(() => {
-    parseCsvData();
+    fetchCsvData();
   }, []);
 
   return (
