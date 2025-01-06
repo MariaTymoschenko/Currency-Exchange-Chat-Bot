@@ -38,14 +38,15 @@ function App() {
 
   return (
     <>
-    <Router>
-    <Header />
-      <Routes>
-        <Route path="/" element={<Converter />} />
-        <Route path="/trends" element={<Trends />} />
-        <Route path="/map" element={<BankMap />} />
-      </Routes>
-    </Router>
+      <div style={{ "height": "100vh" }} >
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Converter />} />
+            <Route path="/trends" element={<Trends />} />
+            <Route path="/map" element={<BankMap />} />
+          </Routes>
+        </Router></div>
     </>
   );
 }
