@@ -7,7 +7,7 @@ const CsvGraph = () => {
 
   const fetchCsvData = async () => {
     try {
-      const response = await fetch('/exchange_history/usduah.csv'); // Path to the CSV file in the public folder
+      const response = await fetch('/exchange_history/Exchange rates - gbp.csv'); // Path to the CSV file in the public folder
       const csvText = await response.text();
 
       // Parse CSV data

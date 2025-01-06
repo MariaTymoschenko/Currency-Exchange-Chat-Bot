@@ -55,14 +55,11 @@ const Trends = () => {
           <option value="PLN">PLN</option>
         </select>
       </div>
-      <CsvGraph/>
       {currency1 && currency2 && (
         <div style={{ marginTop: "30px", width: "80%" }}>
           <h2>
             Exchange Rate Graph: {currency1} to {currency2}
           </h2>
-          {/* Placeholder for graph */}
-
           <div
             style={{
               width: "100%",
@@ -73,7 +70,7 @@ const Trends = () => {
               alignItems: "center",
             }}
           >
-            <p>Graph will be rendered here using data for 1 year</p>
+          <CsvGraph/>
           </div>
         </div>
       )}
