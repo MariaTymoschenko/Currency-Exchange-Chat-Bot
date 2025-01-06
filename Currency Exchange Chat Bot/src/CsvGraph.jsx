@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const CsvGraph = () => {
+const CsvGraph = ({fileName}) => {
   const [data, setData] = useState([]);
 
   const fetchCsvData = async () => {
     try {
-      const response = await fetch('/exchange_history/Exchange rates - gbp.csv'); // Path to the CSV file in the public folder
+      const response = await fetch(`/exchange_history/Exchange rates - ${fileName}.csv`); // Path to the CSV file in the public folder
       const csvText = await response.text();
 
       // Parse CSV data
@@ -39,8 +39,10 @@ const CsvGraph = () => {
   };
 
   useEffect(() => {
-    fetchCsvData();
-  }, []);
+    if (fileName) {
+      fetchCsvData();
+    }
+  }, [fileName]); // Re-fetch if the fileName prop changes
 
   return (
     <ResponsiveContainer width="100%" height={400}>

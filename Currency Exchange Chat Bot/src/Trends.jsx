@@ -25,7 +25,6 @@ const Trends = () => {
             Select Currency
           </option>
           <option value="USD">USD</option>
-          <option value="UAH">UAH</option>
           <option value="EUR">EUR</option>
           <option value="HUF">HUF</option>
           <option value="CZK">CZK</option>
@@ -46,19 +45,13 @@ const Trends = () => {
           <option value="" disabled>
             Select Currency
           </option>
-          <option value="USD">USD</option>
           <option value="UAH">UAH</option>
-          <option value="EUR">EUR</option>
-          <option value="HUF">HUF</option>
-          <option value="CZK">CZK</option>
-          <option value="GBP">GBP</option>
-          <option value="PLN">PLN</option>
         </select>
       </div>
       {currency1 && currency2 && (
         <div style={{ marginTop: "30px", width: "80%" }}>
           <h2>
-            Exchange Rate Graph: {currency1} to {currency2}
+            Exchange Rate Graph: {currency1} to UAH
           </h2>
           <div
             style={{
@@ -70,7 +63,7 @@ const Trends = () => {
               alignItems: "center",
             }}
           >
-          <CsvGraph/>
+          <CsvGraph fileName={currency1}/>
           </div>
         </div>
       )}
