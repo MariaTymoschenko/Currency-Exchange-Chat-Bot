@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CsvGraph from "./CsvGraph";
 
 const Trends = () => {
   const [currency1, setCurrency1] = useState("");
@@ -54,12 +55,14 @@ const Trends = () => {
           <option value="PLN">PLN</option>
         </select>
       </div>
+      <CsvGraph/>
       {currency1 && currency2 && (
         <div style={{ marginTop: "30px", width: "80%" }}>
           <h2>
             Exchange Rate Graph: {currency1} to {currency2}
           </h2>
           {/* Placeholder for graph */}
+
           <div
             style={{
               width: "100%",
