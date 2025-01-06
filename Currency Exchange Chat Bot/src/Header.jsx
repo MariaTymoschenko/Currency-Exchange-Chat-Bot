@@ -116,8 +116,8 @@ const Header = () => {
                 >
                     <i
                         className={`fa-2xl ${isSearchOpen
-                                ? "fa-solid fa-xmark"
-                                : "fa-solid fa-magnifying-glass"
+                            ? "fa-solid fa-xmark"
+                            : "fa-solid fa-magnifying-glass"
                             }`}
                         style={{ color: "rgb(0, 0, 0)" }}
                     ></i>
@@ -176,15 +176,15 @@ const Header = () => {
                             margin: "0",
                         }}
                     >
+                        <li style={{ margin: "10px 0", cursor: "pointer" }}>
+                            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                               <b>Exchange Bot</b> 
+                            </Link></li>
                         <li style={{ margin: "10px 0" }}>
                             <Link to="/trends" style={{ textDecoration: "none", color: "black" }}>
                                 Trends
                             </Link>
                         </li>
-                        <li style={{ margin: "10px 0", cursor: "pointer" }}>
-                            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                                Exchange Bot
-                            </Link></li>
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/map" style={{ textDecoration: "none", color: "black" }}>
                                 Map of Banks nearby
