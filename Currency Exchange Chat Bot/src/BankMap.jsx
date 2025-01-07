@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import MapComponent from "./MapComponent";
 
 const BankMap = () => {
-  return <h2>Map Page</h2>;
+  return (
+    <>
+    <div>
+      <h2>Map</h2>
+      <MapComponent></MapComponent></div>
+  </>
+  );
 };
 
 export default BankMap;
