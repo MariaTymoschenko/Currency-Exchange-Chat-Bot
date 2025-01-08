@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import OverlayVideo from './OverlayVideo';
+import mySound from '/public/sounds/money-counter.mp3';
 
 const CurrencyConverterBot = () => {
-  // State to hold currency list fetched from the API
   const [currencies, setCurrencies] = useState([]);
-  // State to hold chat messages
   const [messages, setMessages] = useState([
     { sender: 'bot', text: 'Please enter the amount which you want to convert from.' },
   ]);
-  // State to manage user input
   const [userInput, setUserInput] = useState("");
-  // State to track the conversation stage
   const [conversationStage, setConversationStage] = useState("enterAmount");
-  // Temporary storage for conversion data
   const [conversionData, setConversionData] = useState({ amount: null, fromCurrency: null });
 
-  // Fetch currency data when the component mounts
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -33,8 +29,8 @@ const CurrencyConverterBot = () => {
     fetchCurrencies();
   }, []);
 
-  // Handle user messages and generate bot responses
   const handleUserMessage = () => {
+    const sound = new Audio(mySound);
     const newMessages = [...messages, { sender: 'user', text: userInput }];
     setMessages(newMessages);
 
@@ -83,6 +79,7 @@ const CurrencyConverterBot = () => {
 
       if (fromRate && toRate) {
         const conversionResult = (amount * fromRate) / toRate;
+        sound.play();
         setMessages([
           ...newMessages,
           {
@@ -104,53 +101,74 @@ const CurrencyConverterBot = () => {
   };
 
   return (
-    <div className="currency-converter-bot mx-auto my-5 p-3 border rounded" style={{ width: '50%' }}>
-      <h2 className="text-center mb-4">Currency Converter Bot</h2>
+    <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+      
+      <div
+        className="currency-converter-bot mx-auto my-5 p-3 border rounded"
+        style={{
+          position: 'absolute',
+          top: '5%',
+          left: '50%',
+          transform: 'translate(-50%, 10%)',
+          width: '50%',
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          zIndex: 1,
+        }}
+      >
+        <h2 className="text-center mb-4">Currency Converter Bot</h2>
 
-      {/* Chat window */}
-      <div className="chat-window border rounded p-3 mb-3">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`d-flex mb-3 ${message.sender === 'bot' ? 'justify-content-start' : 'justify-content-end'}`}
-          >
-            {message.sender === 'bot' && (
-              <img
-                src="/imgs/icon.png"
-                alt="Bot Icon"
-                style={{ width: '30px', height: '30px', marginRight: '10px' }}
-              />
-            )}
+        <div className="chat-window border rounded p-3 mb-3">
+          {messages.map((message, index) => (
             <div
-              className={`msg-bubble p-2 rounded ${
-                message.sender === 'bot' ? 'bg-primary text-white' : 'bg-light text-dark'
+              key={index}
+              className={`d-flex mb-3 ${
+                message.sender === 'bot' ? 'justify-content-start' : 'justify-content-end'
               }`}
-              style={{ maxWidth: '70%' }}
             >
-              <p className="mb-0">{message.text}</p>
+              {message.sender === 'bot' && (
+                <img
+                  src="/imgs/icon.png"
+                  alt="Bot Icon"
+                  style={{ width: '30px', height: '30px', zIndex: 2, marginRight: '10px' }}
+                />
+              )}
+              <div
+                className={`msg-bubble p-2 rounded ${
+                  message.sender === 'bot' ? 'bg-primary text-white' : 'bg-light text-dark'
+                }`}
+                style={{ maxWidth: '70%' }}
+              >
+                <p className="mb-0">{message.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Input field */}
-      <div className="input-group">
-        <input
-          type="text"
-          className="form-control"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleUserMessage();
-            }
-          }}
-          placeholder="Enter your message"
-        />
-        <button className="btn btn-primary" onClick={handleUserMessage}>
-          Send <i className="fa-solid fa-paper-plane"></i>
-        </button>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleUserMessage();
+              }
+            }}
+            placeholder="Enter your message"
+          />
+          <button className="btn btn-primary" onClick={handleUserMessage}>
+            Send <i className="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
       </div>
+      
+      <video  style={{
+          zIndex: 0,
+        }} id="myVideo" className="layer" autoPlay loop muted >
+        <source src="/public/animations/money (1).mp4"/>
+        Your browser does not support the video tag.
+    </video>
     </div>
   );
 };

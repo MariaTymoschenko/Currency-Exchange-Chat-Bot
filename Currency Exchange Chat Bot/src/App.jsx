@@ -9,6 +9,7 @@ import Header from './Header';
 import Converter from './Converter';
 import Trends from './Trends';
 import BankMap from './BankMap';
+import OverlayVideo from './OverlayVideo';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
