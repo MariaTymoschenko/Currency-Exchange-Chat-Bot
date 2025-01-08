@@ -148,7 +148,7 @@ const CurrencyConverterBot = () => {
           placeholder="Enter your message"
         />
         <button className="btn btn-primary" onClick={handleUserMessage}>
-          Send
+          Send <i className="fa-solid fa-paper-plane"></i>
         </button>
       </div>
     </div>

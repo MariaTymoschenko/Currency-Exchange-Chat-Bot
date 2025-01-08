@@ -169,6 +169,23 @@ const Header = () => {
                         padding: "20px",
                     }}
                 >
+                    <button
+                        className="btn d-flex justify-content-center align-items-center"
+                        style={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "10px",
+                            background: "rgba(213, 213, 213, 0.35)",
+                            color: "rgb(0, 0, 0)",
+                            width: "40px",
+                            height: "40px",
+                            borderRadius: "50%",
+                            zIndex: "10",
+                        }}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </button>
                     <h3>Menu</h3>
                     <ul
                         style={{

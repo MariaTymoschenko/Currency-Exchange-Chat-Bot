@@ -12,12 +12,20 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-let isRequestInProgress = false;
+const bankIcon = new L.Icon({
+    iconUrl: "/imgs/bank_icon.png",
+    iconSize: [30, 30]
+})
+const bureauIcon = new L.Icon({
+    iconUrl: "/imgs/moneyexchange_icon.png",
+    iconSize: [30, 30]
+})
 
 const MapComponent = () => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(false);
   const [lastRequestTime, setLastRequestTime] = useState(0);
+  let isRequestInProgress = false;
 
   // Fetch data from Overpass API
   const fetchBankData = async (bounds) => {
@@ -30,7 +38,7 @@ const MapComponent = () => {
       [out:json][timeout:25];
       (
         node["amenity"="bank"](${bbox});
-        node["amenity"="bureau_de_change"](${bbox}); // Include currency exchange
+        node["amenity"="bureau_de_change"](${bbox});
       );
       out body;
     `;
@@ -65,7 +73,7 @@ const MapComponent = () => {
   };
 
   // Apply throttle to the fetchBankData function
-  const throttledFetchBankData = throttle(fetchBankData, 5000); // 2 seconds delay
+  const throttledFetchBankData = throttle(fetchBankData, 2000); // 2 seconds delay
 
   const MapEvents = () => {
     const map = useMapEvents({
@@ -84,7 +92,7 @@ const MapComponent = () => {
     return null;
   };
 
-  return (
+  return (<div>
     <MapContainer center={[50.45, 30.52]} zoom={15} style={{ height: "100vh", width: "100%" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -92,15 +100,17 @@ const MapComponent = () => {
       />
       <MapEvents />
       {locations.map((location) => (
-        <Marker key={location.id} position={[location.lat, location.lon]}>
+        <Marker key={location.id} position={[location.lat, location.lon]} 
+        icon={location?.tags?.amenity==="bank"?bankIcon:bureauIcon}>
           <Popup>
-            <strong>{location.tags?.name || "Unknown Name"}</strong><br />
-            Type: {location.tags?.amenity || "N/A"}
+            <strong>{location.tags.name || ""}</strong><br />
+            {location.tags.opening_hours || ""}<br/>
+            {location.tags.amenity==="bureau_de_change"?"Money Exchange": ""}<br/>
+            {location.tags["addr:street"] || ""} {location.tags["addr:housenumber"] || ""}
           </Popup>
         </Marker>
       ))}
-      {loading && <p style={{ color: "red" }}>Loading...</p>}
-    </MapContainer>
+    </MapContainer></div>
   );
 };
 
