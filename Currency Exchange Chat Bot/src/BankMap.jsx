@@ -6,7 +6,6 @@ const BankMap = () => {
   return (
     <>
     <div>
-      <h2>Map</h2>
       <MapComponent></MapComponent></div>
   </>
   );

@@ -4,12 +4,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-// import ChatBot from './ChatBot';
 import Header from './Header';
 import Converter from './Converter';
 import Trends from './Trends';
 import BankMap from './BankMap';
-import OverlayVideo from './OverlayVideo';
+import About from './About';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
@@ -46,6 +45,7 @@ function App() {
             <Route path="/" element={<Converter />} />
             <Route path="/trends" element={<Trends />} />
             <Route path="/map" element={<BankMap />} />
+            <Route path="about" element={<About/>}/>
           </Routes>
         </Router></div>
     </>

@@ -6,8 +6,23 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchHistory, setSearchHistory] = useState([]);
-    const menuRef = useRef(null); // Ref for the sidebar menu
+    const menuRef = useRef(null);
     const location = useLocation();
+
+    const getTitle = ()=>{
+        switch (location.pathname) {
+            case '/':
+              return 'Currency Exchange Bot';
+            case '/trends':
+              return 'Currency Exchange Trends';
+            case '/map':
+              return 'Currency Exchange Map';
+            case '/about':
+              return 'About Currency Exchange Bot';
+            default:
+              return 'Currency Exchange';
+          }
+        };
 
     const handleSearchClick = () => {
         setIsSearchOpen(!isSearchOpen);
@@ -76,7 +91,7 @@ const Header = () => {
                         style={{ color: "rgb(0, 0, 0)" }}
                     ></i>
                 </button>
-                <h1 className="name m-0">Currency Exchange Bot</h1>
+                {/* <h1 className="name m-0">Currency Exchange Bot</h1> */}
             </div>
             <div className="right-header d-flex align-items-center">
                 {isSearchOpen && (
@@ -207,6 +222,12 @@ const Header = () => {
                     </ul>
                 </div>
             )}
+             <div className="header-title">
+        <h1>{getTitle()}</h1>
+      </div>
+      {/* <div className="currency-exchange">
+        <p>Currency Exchange Section</p>
+      </div> */}
         </header>
     );
 };
