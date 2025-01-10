@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import OverlayVideo from './OverlayVideo';
 import mySound from '/public/sounds/money-counter.mp3';
 
@@ -10,6 +10,7 @@ const CurrencyConverterBot = () => {
   const [userInput, setUserInput] = useState("");
   const [conversationStage, setConversationStage] = useState("enterAmount");
   const [conversionData, setConversionData] = useState({ amount: null, fromCurrency: null });
+  const divRef = useRef(null);
 
   useEffect(() => {
     const fetchCurrencies = async () => {
@@ -28,6 +29,13 @@ const CurrencyConverterBot = () => {
     };
     fetchCurrencies();
   }, []);
+
+  useEffect(() => {
+    divRef.current?.scrollTo({
+      top: divRef.current.scrollHeight,
+      behavior: 'smooth', // Optional: smooth scrolling
+    });
+  }, [messages]); // Dependency on `messages`, so it triggers when `messages` updates
 
   const handleUserMessage = () => {
     const sound = new Audio(mySound);
@@ -135,15 +143,15 @@ const CurrencyConverterBot = () => {
         <h2 className="text-center mb-4">Currency Converter Bot</h2>
 
         <div
+          ref={divRef}
           className="chat-window border rounded p-3 mb-3"
           style={{ maxHeight: '500px', overflowY: 'auto' }}
         >
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`d-flex mb-3 ${
-                message.sender === 'bot' ? 'justify-content-start' : 'justify-content-end'
-              }`}
+              className={`d-flex mb-3 ${message.sender === 'bot' ? 'justify-content-start' : 'justify-content-end'
+                }`}
             >
               {message.sender === 'bot' && (
                 <img
@@ -153,9 +161,8 @@ const CurrencyConverterBot = () => {
                 />
               )}
               <div
-                className={`msg-bubble p-2 rounded ${
-                  message.sender === 'bot' ? 'bg-primary text-white' : 'bg-light text-dark'
-                }`}
+                className={`msg-bubble p-2 rounded ${message.sender === 'bot' ? 'bg-primary text-white' : 'bg-light text-dark'
+                  }`}
                 style={{ maxWidth: '70%' }}
               >
                 <p className="mb-0">{message.text}</p>
