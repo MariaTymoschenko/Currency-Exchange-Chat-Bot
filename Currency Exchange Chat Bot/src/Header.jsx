@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -7,14 +7,10 @@ const Header = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchHistory, setSearchHistory] = useState([]);
     const menuRef = useRef(null); // Ref for the sidebar menu
+    const location = useLocation();
 
     const handleSearchClick = () => {
         setIsSearchOpen(!isSearchOpen);
-    };
-
-    const handleTrashClick = () => {
-        setSearchHistory([]);
-        console.log("Trash button clicked: Clearing history...");
     };
 
     const handleInputChange = (e) => {
@@ -52,6 +48,11 @@ const Header = () => {
             document.removeEventListener("click", handleOutsideClick);
         };
     }, [isMenuOpen]);
+
+    // Close menu on page navigation
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location.pathname]);
 
     return (
         <header
@@ -122,7 +123,7 @@ const Header = () => {
                     </div>
                 )}
                 <button
-                    className="btn d-flex justify-content-center align-items-center me-2"
+                    className="btn d-flex justify-content-center align-items-center"
                     style={{
                         background: "rgba(213, 213, 213, 0.35)",
                         color: "rgb(0, 0, 0)",
@@ -140,23 +141,10 @@ const Header = () => {
                         style={{ color: "rgb(0, 0, 0)" }}
                     ></i>
                 </button>
-                <button
-                    className="btn d-flex justify-content-center align-items-center"
-                    style={{
-                        background: "rgba(213, 213, 213, 0.35)",
-                        color: "rgb(0, 0, 0)",
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                    }}
-                    onClick={handleTrashClick}
-                >
-                    <i className="fa-regular fa-trash-can fa-2xl"></i>
-                </button>
             </div>
             {isMenuOpen && (
                 <div
-                    ref={menuRef} // Attach the ref to the sidebar menu
+                    ref={menuRef}
                     style={{
                         position: "fixed",
                         top: "0",
@@ -169,24 +157,26 @@ const Header = () => {
                         padding: "20px",
                     }}
                 >
-                    <button
-                        className="btn d-flex justify-content-center align-items-center"
-                        style={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "10px",
-                            background: "rgba(213, 213, 213, 0.35)",
-                            color: "rgb(0, 0, 0)",
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50%",
-                            zIndex: "10",
-                        }}
-                        onClick={() => setIsMenuOpen(false)}
+                    <div
+                        className="d-flex justify-content-between align-items-center"
+                        style={{ marginBottom: "20px" }}
                     >
-                        <i className="fa-solid fa-xmark"></i>
-                    </button>
-                    <h3>Menu</h3>
+                        <h3 style={{ margin: 0 }}>Menu</h3>
+                        <button
+                            className="btn d-flex justify-content-center align-items-center"
+                            style={{
+                                background: "rgba(213, 213, 213, 0.35)",
+                                color: "rgb(0, 0, 0)",
+                                width: "40px",
+                                height: "40px",
+                                borderRadius: "50%",
+                                zIndex: "10",
+                            }}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
                     <ul
                         style={{
                             listStyleType: "none",
@@ -199,7 +189,7 @@ const Header = () => {
                                 <b>Exchange Bot</b>
                             </Link>
                         </li>
-                        <li style={{ margin: "10px 0" }}>
+                        <li style={{ margin: "10px 0", cursor:"pointer" }}>
                             <Link to="/trends" style={{ textDecoration: "none", color: "black" }}>
                                 Trends
                             </Link>
@@ -207,6 +197,11 @@ const Header = () => {
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/map" style={{ textDecoration: "none", color: "black" }}>
                                 Map of Banks nearby
+                            </Link>
+                        </li>
+                        <li style={{ margin: "10px 0", cursor: "pointer" }}>
+                            <Link to="/about" style={{ textDecoration: "none", color: "black" }}>
+                                About
                             </Link>
                         </li>
                     </ul>
