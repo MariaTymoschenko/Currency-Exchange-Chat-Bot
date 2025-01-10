@@ -102,7 +102,24 @@ const CurrencyConverterBot = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
-      
+      <video
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: 0,
+        }}
+        autoPlay
+        loop
+        muted
+      >
+        <source src="/public/animations/money (1).mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <div
         className="currency-converter-bot mx-auto my-5 p-3 border rounded"
         style={{
@@ -117,7 +134,10 @@ const CurrencyConverterBot = () => {
       >
         <h2 className="text-center mb-4">Currency Converter Bot</h2>
 
-        <div className="chat-window border rounded p-3 mb-3">
+        <div
+          className="chat-window border rounded p-3 mb-3"
+          style={{ maxHeight: '500px', overflowY: 'auto' }}
+        >
           {messages.map((message, index) => (
             <div
               key={index}
@@ -162,13 +182,6 @@ const CurrencyConverterBot = () => {
           </button>
         </div>
       </div>
-      
-      <video  style={{
-          zIndex: 0,
-        }} id="myVideo" className="layer" autoPlay loop muted >
-        <source src="/public/animations/money (1).mp4"/>
-        Your browser does not support the video tag.
-    </video>
     </div>
   );
 };

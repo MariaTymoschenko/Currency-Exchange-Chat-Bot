@@ -4,6 +4,7 @@ import CsvGraph from "./CsvGraph";
 const Trends = () => {
   const [currency1, setCurrency1] = useState("");
   const [currency2, setCurrency2] = useState("");
+  const currencies = ["USD", "EUR", "HUF", "CZK", "GBP", "PLN", "UAH"];
 
   const handleCurrency1Change = (e) => {
     setCurrency1(e.target.value);
@@ -24,12 +25,13 @@ const Trends = () => {
           <option value="" disabled>
             Select Currency
           </option>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="HUF">HUF</option>
-          <option value="CZK">CZK</option>
-          <option value="GBP">GBP</option>
-          <option value="PLN">PLN</option>
+          {currencies
+            .filter((currency) => currency !== currency2)
+            .map((currency) => (
+              <option key={currency} value={currency}>
+                {currency}
+              </option>
+            ))}
         </select>
 
         <i
@@ -42,16 +44,22 @@ const Trends = () => {
           value={currency2}
           onChange={handleCurrency2Change}
         >
-          <option value="" disabled>
+           <option value="" disabled>
             Select Currency
           </option>
-          <option value="UAH">UAH</option>
+          {currencies
+            .filter((currency) => currency !== currency1)
+            .map((currency) => (
+              <option key={currency} value={currency}>
+                {currency}
+              </option>
+            ))}
         </select>
       </div>
       {currency1 && currency2 && (
         <div style={{ marginTop: "30px", width: "80%" }}>
           <h2>
-            Exchange Rate Graph: {currency1} to UAH
+            Exchange Rate Graph: {currency1} to {currency2}
           </h2>
           <div
             style={{
