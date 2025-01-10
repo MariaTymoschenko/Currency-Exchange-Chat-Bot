@@ -145,7 +145,7 @@ const CurrencyConverterBot = () => {
         <div
           ref={divRef}
           className="chat-window border rounded p-3 mb-3"
-          style={{ maxHeight: '500px', overflowY: 'auto' }}
+          style={{ height: '500px', overflowY: 'auto' }}
         >
           {messages.map((message, index) => (
             <div
