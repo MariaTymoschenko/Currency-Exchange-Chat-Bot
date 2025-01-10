@@ -3,7 +3,7 @@ import React from 'react';
 function About() {
     return (
         <div>
-            <h1>About Our Website</h1>
+            <h2>About Our Website</h2>
             <p>Welcome to our Currency Exchange Chat Bot platform, your comprehensive tool for effortless currency conversion and financial insights. Here’s what you can explore on our website:</p>
 
 <h4>Chat Bot for Currency Conversion</h4>
