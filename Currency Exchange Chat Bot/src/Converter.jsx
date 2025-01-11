@@ -34,7 +34,7 @@ const CurrencyConverterBot = () => {
       top: divRef.current.scrollHeight,
       behavior: 'smooth', // Optional: smooth scrolling
     });
-  }, [messages]); // Dependency on `messages`, so it triggers when `messages` updates
+  }, [messages]);
 
   const handleUserMessage = () => {
     const sound = new Audio(mySound);

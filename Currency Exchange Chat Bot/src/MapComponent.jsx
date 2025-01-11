@@ -26,9 +26,8 @@ const MapComponent = () => {
   const [lastRequestTime, setLastRequestTime] = useState(0);
   let isRequestInProgress = false;
 
-  // Fetch data from Overpass API
   const fetchBankData = async (bounds) => {
-    if (isRequestInProgress) return; // Prevent overlapping requests
+    if (isRequestInProgress) return;
     setLoading(true);
     isRequestInProgress = true;
     const { _southWest, _northEast } = bounds;
@@ -58,7 +57,6 @@ const MapComponent = () => {
     }
   };
 
-  // Custom throttle function
   const throttle = (func, wait) => {
     return function (...args) {
       const now = Date.now();
@@ -66,24 +64,22 @@ const MapComponent = () => {
 
       if (timeSinceLastCall >= wait) {
         setLastRequestTime(now);
-        func(...args); // Call the function if enough time has passed
+        func(...args);
       }
     };
   };
 
-  // Apply throttle to the fetchBankData function
-  const throttledFetchBankData = throttle(fetchBankData, 2000); // 2 seconds delay
+  const throttledFetchBankData = throttle(fetchBankData, 2000);
 
   const MapEvents = () => {
     const map = useMapEvents({
       moveend: () => {
         const bounds = map.getBounds();
-        throttledFetchBankData(bounds); // Trigger throttled fetch on map move
+        throttledFetchBankData(bounds);
       },
     });
 
     useEffect(() => {
-      // Fetch data on initial load
       const bounds = map.getBounds();
       throttledFetchBankData(bounds);
     }, []);
