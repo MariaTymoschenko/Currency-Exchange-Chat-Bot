@@ -22,7 +22,7 @@ h1 {
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 767px) or (max-height:900px) {
   .currency-converter-bot {
     width: 100% !important;
     height: calc( 100% - 80px) !important;
@@ -33,7 +33,6 @@ h1 {
     left: 0 !important;
     transform: none !important;
     position: absolute !important;
-
     display: flex  !important;
     flex-direction: column  !important;
   }

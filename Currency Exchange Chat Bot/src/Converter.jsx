@@ -4,7 +4,7 @@ import mySound from '/public/sounds/money-counter.mp3';
 const CurrencyConverterBot = () => {
   const [currencies, setCurrencies] = useState([]);
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Please, enter the amount you wish to convert.' },
+    { sender: 'bot', text: 'Please enter the amount you wish to convert.' },
   ]);
   const [userInput, setUserInput] = useState("");
   const [conversationStage, setConversationStage] = useState("enterAmount");
@@ -162,7 +162,7 @@ const CurrencyConverterBot = () => {
               <div
                 className={`msg-bubble p-2 rounded ${message.sender === 'bot' ? 'bg-primary text-white' : 'bg-light text-dark'
                   }`}
-                style={{ maxWidth: '70%' }}
+                style={{ maxWidth: '90%' }}
               >
                 <p className="mb-0">{message.text}</p>
               </div>
