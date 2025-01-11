@@ -15,7 +15,7 @@ const Header = () => {
             case '/map':
                 return 'Currency Exchange Map';
             case '/about':
-                return 'About Currency Exchange Bot';
+                return 'About Us';
             default:
                 return 'Currency Exchange';
         }
@@ -56,7 +56,7 @@ const Header = () => {
         >
             <div className="left-header d-flex align-items-center">
                 <button
-                    className="btn d-flex justify-content-center align-items-center me-3"
+                    className="btn d-flex justify-content-center align-items-center me-1 me-md-3"
                     style={{
                         background: "rgba(213, 213, 213, 0.35)",
                         color: "rgb(0, 0, 0)",
