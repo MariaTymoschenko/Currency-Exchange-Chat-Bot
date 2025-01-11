@@ -153,6 +153,7 @@ const CurrencyConverterBot = () => {
         autoPlay
         loop
         muted
+        playsInline
       >
         <source src="/animations/money (1).mp4" />
         Your browser does not support the video tag.
