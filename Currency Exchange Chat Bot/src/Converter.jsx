@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import mySound from '/public/sounds/money-counter.mp3';
+import mySound from '/sounds/money-counter.mp3';
 
 const CurrencyConverterBot = () => {
   const [currencies, setCurrencies] = useState([]);
@@ -33,7 +33,7 @@ const CurrencyConverterBot = () => {
   useEffect(() => {
     const loadCurrencyNames = async () => {
       try {
-        const response = await fetch('/public/currency_names.json');
+        const response = await fetch('/currency_names.json');
         const data = await response.json();
         setCurrencyMap(data);
       } catch (error) {
@@ -154,7 +154,7 @@ const CurrencyConverterBot = () => {
         loop
         muted
       >
-        <source src="/public/animations/money (1).mp4" />
+        <source src="/animations/money (1).mp4" />
         Your browser does not support the video tag.
       </video>
 
