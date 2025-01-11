@@ -33,7 +33,7 @@ const CurrencyConverterBot = () => {
   useEffect(() => {
     const loadCurrencyNames = async () => {
       try {
-        const response = await fetch('/src/assets/currency_names.json');
+        const response = await fetch('/public/currency_names.json');
         const data = await response.json();
         setCurrencyMap(data);
       } catch (error) {
