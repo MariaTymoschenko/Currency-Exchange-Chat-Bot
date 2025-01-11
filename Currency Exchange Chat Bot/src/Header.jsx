@@ -9,17 +9,17 @@ const Header = () => {
     const getTitle = ()=>{
         switch (location.pathname) {
             case '/':
-              return 'Currency Exchange Bot';
+                return 'Currency Exchange Bot';
             case '/trends':
-              return 'Currency Exchange Trends';
+                return 'Currency Exchange Trends';
             case '/map':
-              return 'Currency Exchange Map';
+                return 'Currency Exchange Map';
             case '/about':
-              return 'About Currency Exchange Bot';
+                return 'About Currency Exchange Bot';
             default:
-              return 'Currency Exchange';
-          }
-        };
+                return 'Currency Exchange';
+        }
+    };
 
     const toggleMenu = (event) => {
         event.stopPropagation();
@@ -48,32 +48,32 @@ const Header = () => {
 
     return (
         <header
-        className="header p-3 d-flex justify-content-start align-items-start bd-navbar sticky-top"
-        style={{
-          background: "rgb(9, 162, 70)",
-          color: "rgb(255, 255, 255)",
-        }}
-      >
-        <div className="left-header d-flex align-items-center">
-          <button
-            className="btn d-flex justify-content-center align-items-center me-3"
+            className="header p-3 d-flex justify-content-start align-items-start bd-navbar sticky-top"
             style={{
-              background: "rgba(213, 213, 213, 0.35)",
-              color: "rgb(0, 0, 0)",
-              width: "50px",
-              height: "50px",
-              borderRadius: "50%",
+                background: "rgb(9, 162, 70)",
+                color: "rgb(255, 255, 255)",
             }}
-            onClick={toggleMenu}
-          >
-      
+        >
+            <div className="left-header d-flex align-items-center">
+                <button
+                    className="btn d-flex justify-content-center align-items-center me-3"
+                    style={{
+                        background: "rgba(213, 213, 213, 0.35)",
+                        color: "rgb(0, 0, 0)",
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                    }}
+                    onClick={toggleMenu}
+                >
+
                     <i
                         className={`fa-2xl ${isMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}`}
                         style={{ color: "rgb(0, 0, 0)" }}
                     ></i>
                 </button>
             </div>
-            
+
             {isMenuOpen && (
                 <div
                     ref={menuRef}
@@ -118,10 +118,10 @@ const Header = () => {
                     >
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/" className="nav-link" activeClassName="active" style={{ textDecoration: "underline", color: "black" }}>
-<h5>                                Exchange Bot
-</h5>                           </Link>
+                                <h5>Exchange Bot</h5>
+                            </Link>
                         </li>
-                        <li style={{ margin: "10px 0", cursor:"pointer" }}>
+                        <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/trends" style={{ textDecoration: "none", color: "black" }}>
                                 <h5>Trends</h5>
                             </Link>
@@ -139,9 +139,9 @@ const Header = () => {
                     </ul>
                 </div>
             )}
-             <div className="header-title">
-             <h1 className="mb-0">{getTitle()}</h1>
-             </div>
+            <div className="header-title">
+                <h1 className="mb-0">{getTitle()}</h1>
+            </div>
         </header>
     );
 };
