@@ -3,6 +3,11 @@
   overflow: hidden;
 }
 
+h1 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 * {
   font-family: "PT Serif", serif;
   font-weight: 400;
@@ -20,7 +25,7 @@ h1 {
 @media (max-width: 767px) {
   .currency-converter-bot {
     width: 100% !important;
-    height: calc( 100% - 100px) !important;
+    height: calc( 100% - 80px) !important;
     margin: 0 !important;
     margin-top: 0;
     padding: 0 !important;
@@ -51,7 +56,7 @@ h1 {
   }
 }
 
-@media (min-width: 767px) {
+@media (min-width: 768px) {
   .chat-window {
     border: 1px  solid #dee2e6;
   }
