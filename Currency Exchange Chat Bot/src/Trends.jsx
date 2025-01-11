@@ -71,7 +71,7 @@ const Trends = () => {
               alignItems: "center",
             }}
           >
-          <CsvGraph fileName={currency1}/>
+          <CsvGraph fromCurrency={currency1} toCurrency={currency2}/>
           </div>
         </div>
       )}
