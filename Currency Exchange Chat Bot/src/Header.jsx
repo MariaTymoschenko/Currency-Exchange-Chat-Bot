@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchHistory, setSearchHistory] = useState([]);
     const menuRef = useRef(null);
     const location = useLocation();
 
@@ -23,24 +20,6 @@ const Header = () => {
               return 'Currency Exchange';
           }
         };
-
-    const handleSearchClick = () => {
-        setIsSearchOpen(!isSearchOpen);
-    };
-
-    const handleInputChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleSearch = () => {
-        if (searchQuery && !searchHistory.includes(searchQuery)) {
-            setSearchHistory([searchQuery, ...searchHistory]);
-        }
-    };
-
-    const handleHistoryClick = (query) => {
-        setSearchQuery(query);
-    };
 
     const toggleMenu = (event) => {
         event.stopPropagation(); // Prevent event from bubbling up to document
@@ -93,70 +72,7 @@ const Header = () => {
                 </button>
                 {/* <h1 className="name m-0">Currency Exchange Bot</h1> */}
             </div>
-            <div className="right-header d-flex align-items-center">
-                {isSearchOpen && (
-                    <div style={{ position: "relative" }}>
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="form-control me-2"
-                            style={{ width: "200px" }}
-                            value={searchQuery}
-                            onChange={handleInputChange}
-                            onBlur={handleSearch}
-                        />
-                        {searchQuery && (
-                            <ul
-                                style={{
-                                    position: "absolute",
-                                    top: "35px",
-                                    left: "0",
-                                    background: "white",
-                                    border: "1px solid #ddd",
-                                    width: "200px",
-                                    maxHeight: "200px",
-                                    overflowY: "auto",
-                                    listStyleType: "none",
-                                    padding: "5px",
-                                    margin: "0",
-                                }}
-                            >
-                                {searchHistory.map((historyItem, index) => (
-                                    <li
-                                        key={index}
-                                        style={{
-                                            padding: "5px",
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => handleHistoryClick(historyItem)}
-                                    >
-                                        {historyItem}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                )}
-                <button
-                    className="btn d-flex justify-content-center align-items-center"
-                    style={{
-                        background: "rgba(213, 213, 213, 0.35)",
-                        color: "rgb(0, 0, 0)",
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                    }}
-                    onClick={handleSearchClick}
-                >
-                    <i
-                        className={`fa-2xl ${isSearchOpen
-                            ? "fa-solid fa-xmark"
-                            : "fa-solid fa-magnifying-glass"
-                            }`}
-                        style={{ color: "rgb(0, 0, 0)" }}
-                    ></i>
-                </button>
-            </div>
+            
             {isMenuOpen && (
                 <div
                     ref={menuRef}
@@ -225,9 +141,6 @@ const Header = () => {
              <div className="header-title">
         <h1>{getTitle()}</h1>
       </div>
-      {/* <div className="currency-exchange">
-        <p>Currency Exchange Section</p>
-      </div> */}
         </header>
     );
 };
