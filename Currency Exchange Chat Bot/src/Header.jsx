@@ -22,11 +22,10 @@ const Header = () => {
         };
 
     const toggleMenu = (event) => {
-        event.stopPropagation(); // Prevent event from bubbling up to document
+        event.stopPropagation();
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -43,34 +42,36 @@ const Header = () => {
         };
     }, [isMenuOpen]);
 
-    // Close menu on page navigation
     useEffect(() => {
         setIsMenuOpen(false);
     }, [location.pathname]);
 
     return (
         <header
-            className="header p-3 d-flex justify-content-between align-items-center bd-navbar sticky-top"
-            style={{ background: "rgb(9, 162, 70)", color: "rgb(255, 255, 255)" }}
-        >
-            <div className="left-header d-flex align-items-center">
-                <button
-                    className="btn d-flex justify-content-center align-items-center me-2"
-                    style={{
-                        background: "rgba(213, 213, 213, 0.35)",
-                        color: "rgb(0, 0, 0)",
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                    }}
-                    onClick={toggleMenu}
-                >
+        className="header p-3 d-flex justify-content-start align-items-start bd-navbar sticky-top"
+        style={{
+          background: "rgb(9, 162, 70)",
+          color: "rgb(255, 255, 255)",
+        }}
+      >
+        <div className="left-header d-flex align-items-center">
+          <button
+            className="btn d-flex justify-content-center align-items-center me-3"
+            style={{
+              background: "rgba(213, 213, 213, 0.35)",
+              color: "rgb(0, 0, 0)",
+              width: "50px",
+              height: "50px",
+              borderRadius: "50%",
+            }}
+            onClick={toggleMenu}
+          >
+      
                     <i
                         className={`fa-2xl ${isMenuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"}`}
                         style={{ color: "rgb(0, 0, 0)" }}
                     ></i>
                 </button>
-                {/* <h1 className="name m-0">Currency Exchange Bot</h1> */}
             </div>
             
             {isMenuOpen && (
@@ -82,7 +83,7 @@ const Header = () => {
                         left: "0",
                         height: "100%",
                         width: "250px",
-                        background: "#bbb",
+                        background: "rgb(54, 186, 96)",
                         boxShadow: "2px 0 5px rgba(0,0,0,0.5)",
                         zIndex: "1",
                         padding: "20px",
@@ -92,7 +93,7 @@ const Header = () => {
                         className="d-flex justify-content-between align-items-center"
                         style={{ marginBottom: "20px" }}
                     >
-                        <h3 style={{ margin: 0 }}>Menu</h3>
+                        <h2 style={{ margin: 0 }}>Menu</h2>
                         <button
                             className="btn d-flex justify-content-center align-items-center"
                             style={{
@@ -116,31 +117,31 @@ const Header = () => {
                         }}
                     >
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
-                            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-                                <b>Exchange Bot</b>
-                            </Link>
+                            <Link to="/" className="nav-link" activeClassName="active" style={{ textDecoration: "underline", color: "black" }}>
+<h5>                                Exchange Bot
+</h5>                           </Link>
                         </li>
                         <li style={{ margin: "10px 0", cursor:"pointer" }}>
                             <Link to="/trends" style={{ textDecoration: "none", color: "black" }}>
-                                Trends
+                                <h5>Trends</h5>
                             </Link>
                         </li>
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/map" style={{ textDecoration: "none", color: "black" }}>
-                                Map of Banks nearby
+                                <h5>Map of Banks nearby</h5>
                             </Link>
                         </li>
                         <li style={{ margin: "10px 0", cursor: "pointer" }}>
                             <Link to="/about" style={{ textDecoration: "none", color: "black" }}>
-                                About
+                                <h5>About</h5>
                             </Link>
                         </li>
                     </ul>
                 </div>
             )}
              <div className="header-title">
-        <h1>{getTitle()}</h1>
-      </div>
+             <h1 className="mb-0">{getTitle()}</h1>
+             </div>
         </header>
     );
 };
