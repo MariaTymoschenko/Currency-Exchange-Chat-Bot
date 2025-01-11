@@ -37,13 +37,7 @@ const CurrencyConverterBot = () => {
       try {
         const response = await fetch('/src/assets/currency_names.json'); // Adjust the path as needed
         const data = await response.json();
-        const map = {};
-        data.forEach((entry) => {
-          const [name, code] = Object.entries(entry)[0];
-          map[name.toUpperCase()] = code; // Map names to codes
-          map[code.toUpperCase()] = code; // Map codes to themselves
-        });
-        setCurrencyMap(map);
+        setCurrencyMap(data); // Save it to state
       } catch (error) {
         console.error('Error loading currency names:', error);
       }
@@ -60,6 +54,23 @@ const CurrencyConverterBot = () => {
   }, [messages]);
 
   const handleUserMessage = () => {
+
+    // Find currency by substring match
+    const findCurrencyByInput = (input) => {
+      input = input.toLowerCase();
+
+      // Search through the array of objects
+      const match = currencyMap.find((currencyObj) => {
+        const [name, code] = Object.entries(currencyObj)[0]; // Extract name and code
+        return (
+          code.toLowerCase() === input || // Exact match for currency code
+          name.toLowerCase().includes(input) // Substring match for currency name
+        );
+      });
+
+      return match ? Object.values(match)[0] : null; // Return the currency code if found
+    };
+
     const sound = new Audio(mySound);
     const newMessages = [...messages, { sender: 'user', text: userInput }];
     setMessages(newMessages);
@@ -82,7 +93,7 @@ const CurrencyConverterBot = () => {
         ]);
       }
     } else if (conversationStage === "enterFromCurrency") {
-      const fromCurrency = currencyMap[input];
+      const fromCurrency = findCurrencyByInput(input);
       if (fromCurrency) {
         setConversionData({ ...conversionData, fromCurrency });
         setMessages([
@@ -97,7 +108,7 @@ const CurrencyConverterBot = () => {
         ]);
       }
     } else if (conversationStage === "enterToCurrency") {
-      const toCurrency = currencyMap[input];
+      const toCurrency = findCurrencyByInput(input);
       const { amount, fromCurrency } = conversionData;
       const fromRate =
         fromCurrency === 'UAH'
