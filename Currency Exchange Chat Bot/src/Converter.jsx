@@ -3,6 +3,7 @@ import mySound from '/public/sounds/money-counter.mp3';
 
 const CurrencyConverterBot = () => {
   const [currencies, setCurrencies] = useState([]);
+  const [currencyMap, setCurrencyMap] = useState({});
   const [messages, setMessages] = useState([
     { sender: 'bot', text: 'Please enter the amount you wish to convert.' },
   ]);
@@ -11,6 +12,7 @@ const CurrencyConverterBot = () => {
   const [conversionData, setConversionData] = useState({ amount: null, fromCurrency: null });
   const divRef = useRef(null);
 
+  // Fetch currency rates
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -29,6 +31,27 @@ const CurrencyConverterBot = () => {
     fetchCurrencies();
   }, []);
 
+  // Load currency names and map to codes
+  useEffect(() => {
+    const loadCurrencyNames = async () => {
+      try {
+        const response = await fetch('/src/assets/currency_names.json'); // Adjust the path as needed
+        const data = await response.json();
+        const map = {};
+        data.forEach((entry) => {
+          const [name, code] = Object.entries(entry)[0];
+          map[name.toUpperCase()] = code; // Map names to codes
+          map[code.toUpperCase()] = code; // Map codes to themselves
+        });
+        setCurrencyMap(map);
+      } catch (error) {
+        console.error('Error loading currency names:', error);
+      }
+    };
+    loadCurrencyNames();
+  }, []);
+
+  // Scroll chat window
   useEffect(() => {
     divRef.current?.scrollTo({
       top: divRef.current.scrollHeight,
@@ -41,13 +64,15 @@ const CurrencyConverterBot = () => {
     const newMessages = [...messages, { sender: 'user', text: userInput }];
     setMessages(newMessages);
 
+    const input = userInput.toUpperCase();
+
     if (conversationStage === "enterAmount") {
       const amount = parseFloat(userInput);
       if (!isNaN(amount) && amount > 0) {
         setConversionData({ ...conversionData, amount });
         setMessages([
           ...newMessages,
-          { sender: 'bot', text: 'Please enter the currency you want to convert from (e.g., USD).' },
+          { sender: 'bot', text: 'Please enter the currency you want to convert from (e.g., USD or "United States Dollar").' },
         ]);
         setConversationStage("enterFromCurrency");
       } else {
@@ -57,12 +82,12 @@ const CurrencyConverterBot = () => {
         ]);
       }
     } else if (conversationStage === "enterFromCurrency") {
-      const fromCurrency = userInput.toUpperCase();
-      if (currencies.find((c) => c.cc === fromCurrency) || fromCurrency === "UAH") {
+      const fromCurrency = currencyMap[input];
+      if (fromCurrency) {
         setConversionData({ ...conversionData, fromCurrency });
         setMessages([
           ...newMessages,
-          { sender: 'bot', text: 'Please enter the currency you want to convert to (e.g., EUR).' },
+          { sender: 'bot', text: 'Please enter the currency you want to convert to (e.g., EUR or "Euro").' },
         ]);
         setConversationStage("enterToCurrency");
       } else {
@@ -72,7 +97,7 @@ const CurrencyConverterBot = () => {
         ]);
       }
     } else if (conversationStage === "enterToCurrency") {
-      const toCurrency = userInput.toUpperCase();
+      const toCurrency = currencyMap[input];
       const { amount, fromCurrency } = conversionData;
       const fromRate =
         fromCurrency === 'UAH'
