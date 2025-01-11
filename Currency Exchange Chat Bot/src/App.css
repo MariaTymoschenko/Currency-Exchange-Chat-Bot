@@ -50,6 +50,6 @@ h1 {
 
 @media (min-width: 767px) {
   .chat-window {
-    border: 2px solid;
+    border: 1px  solid #dee2e6;
   }
 }
