@@ -12,7 +12,6 @@ const CurrencyConverterBot = () => {
   const [conversionData, setConversionData] = useState({ amount: null, fromCurrency: null });
   const divRef = useRef(null);
 
-  // Fetch currency rates
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -31,13 +30,12 @@ const CurrencyConverterBot = () => {
     fetchCurrencies();
   }, []);
 
-  // Load currency names and map to codes
   useEffect(() => {
     const loadCurrencyNames = async () => {
       try {
-        const response = await fetch('/src/assets/currency_names.json'); // Adjust the path as needed
+        const response = await fetch('/src/assets/currency_names.json');
         const data = await response.json();
-        setCurrencyMap(data); // Save it to state
+        setCurrencyMap(data);
       } catch (error) {
         console.error('Error loading currency names:', error);
       }
@@ -45,30 +43,27 @@ const CurrencyConverterBot = () => {
     loadCurrencyNames();
   }, []);
 
-  // Scroll chat window
   useEffect(() => {
     divRef.current?.scrollTo({
       top: divRef.current.scrollHeight,
-      behavior: 'smooth', // Optional: smooth scrolling
+      behavior: 'smooth',
     });
   }, [messages]);
 
   const handleUserMessage = () => {
 
-    // Find currency by substring match
     const findCurrencyByInput = (input) => {
       input = input.toLowerCase();
 
-      // Search through the array of objects
       const match = currencyMap.find((currencyObj) => {
-        const [name, code] = Object.entries(currencyObj)[0]; // Extract name and code
+        const [name, code] = Object.entries(currencyObj)[0];
         return (
-          code.toLowerCase() === input || // Exact match for currency code
-          name.toLowerCase().includes(input) // Substring match for currency name
+          code.toLowerCase() === input || 
+          name.toLowerCase().includes(input)
         );
       });
 
-      return match ? Object.values(match)[0] : null; // Return the currency code if found
+      return match ? Object.values(match)[0] : null;
     };
 
     const sound = new Audio(mySound);

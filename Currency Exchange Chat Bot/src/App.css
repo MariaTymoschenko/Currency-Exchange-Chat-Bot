@@ -8,6 +8,7 @@ h1 {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 * {
   font-family: "PT Serif", serif;
   font-weight: 400;
@@ -25,7 +26,7 @@ h1 {
 @media (max-width: 767px) or (max-height:900px) {
   .currency-converter-bot {
     width: 100% !important;
-    height: calc( 100% - 80px) !important;
+    height: calc(100% - 80px) !important;
     margin: 0 !important;
     margin-top: 0;
     padding: 0 !important;
@@ -33,15 +34,15 @@ h1 {
     left: 0 !important;
     transform: none !important;
     position: absolute !important;
-    display: flex  !important;
-    flex-direction: column  !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   .currency-converter-bot h2 {
     display: none;
   }
 
-  .chat-window{
+  .chat-window {
     flex: 1 !important;
   }
 
@@ -57,6 +58,6 @@ h1 {
 
 @media (min-width: 768px) {
   .chat-window {
-    border: 1px  solid #dee2e6;
+    border: 1px solid #dee2e6;
   }
 }
