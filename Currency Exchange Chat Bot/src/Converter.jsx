@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OverlayVideo from './OverlayVideo';
 import mySound from '/public/sounds/money-counter.mp3';
 
 const CurrencyConverterBot = () => {
   const [currencies, setCurrencies] = useState([]);
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Please enter the amount which you want to convert from.' },
+    { sender: 'bot', text: 'Please, enter the amount you wish to convert.' },
   ]);
   const [userInput, setUserInput] = useState("");
   const [conversationStage, setConversationStage] = useState("enterAmount");
@@ -69,7 +68,7 @@ const CurrencyConverterBot = () => {
       } else {
         setMessages([
           ...newMessages,
-          { sender: 'bot', text: 'Invalid currency code. Please enter a valid currency.' },
+          { sender: 'bot', text: 'Invalid currency. Please enter a valid one.' },
         ]);
       }
     } else if (conversationStage === "enterToCurrency") {
@@ -129,7 +128,7 @@ const CurrencyConverterBot = () => {
       </video>
 
       <div
-        className="currency-converter-bot mx-auto my-5 p-3 border rounded"
+        className="currency-converter-bot mx-auto p-3 border rounded"
         style={{
           position: 'absolute',
           top: '5%',
@@ -144,7 +143,7 @@ const CurrencyConverterBot = () => {
 
         <div
           ref={divRef}
-          className="chat-window border rounded p-3 mb-3"
+          className="chat-window p-3 mb-3"
           style={{ height: '500px', overflowY: 'auto' }}
         >
           {messages.map((message, index) => (

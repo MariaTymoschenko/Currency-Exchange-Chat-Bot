@@ -3,15 +3,53 @@
   overflow: hidden;
 }
 
-*{
-  box-sizing: border-box;
+* {
   font-family: "PT Serif", serif;
   font-weight: 400;
   font-style: normal;
 }
-h1{
+
+h1 {
   font-family: "Orbitron", serif;
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+}
+
+
+@media (max-width: 767px) {
+  .currency-converter-bot {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    margin-top: 0;
+    padding: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    position: absolute !important;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .currency-converter-bot h2 {
+    display: none;
+  }
+
+  .input-group {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    /* Optional shadow for visibility */
+  }
+}
+
+@media (min-width: 767px) {
+  .chat-window {
+    border: 2px solid;
+  }
 }
