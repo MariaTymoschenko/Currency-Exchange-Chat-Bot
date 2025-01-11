@@ -3,12 +3,6 @@
   overflow: hidden;
 }
 
-h1 {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
 * {
   font-family: "PT Serif", serif;
   font-weight: 400;
@@ -16,6 +10,9 @@ h1 {
 }
 
 h1 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   font-family: "Orbitron", serif;
   font-optical-sizing: auto;
   font-weight: 600;
@@ -23,7 +20,12 @@ h1 {
 }
 
 
+
 @media (max-width: 767px) or (max-height:900px) {
+  h1{
+    font-size: 20px !important;
+  }
+
   .currency-converter-bot {
     width: 100% !important;
     height: calc(100% - 80px) !important;

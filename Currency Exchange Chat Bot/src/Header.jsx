@@ -48,7 +48,7 @@ const Header = () => {
 
     return (
         <header
-            className="header p-3 d-flex justify-content-start align-items-start bd-navbar sticky-top"
+            className="header p-3 d-flex justify-content-start align-items-center bd-navbar sticky-top"
             style={{
                 background: "rgb(9, 162, 70)",
                 color: "rgb(255, 255, 255)",
@@ -139,7 +139,7 @@ const Header = () => {
                     </ul>
                 </div>
             )}
-            <div className="header-title">
+            <div>
                 <h1 className="mb-0">{getTitle()}</h1>
             </div>
         </header>
