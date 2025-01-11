@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import CsvGraph from "./CsvGraph";
 
 const Trends = () => {
-  const [currency1, setCurrency1] = useState("");
-  const [currency2, setCurrency2] = useState("");
+  const [currency1, setCurrency1] = useState("USD");
+  const [currency2, setCurrency2] = useState("UAH");
   const currencies = ["USD", "EUR", "HUF", "CZK", "GBP", "PLN", "UAH"];
 
   const handleCurrency1Change = (e) => {
